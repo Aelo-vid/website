@@ -26,6 +26,33 @@
             background: #555;
             border-radius: 3px;
         }
+
+        /* Custom animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
     </style>
 
 <link rel="stylesheet" href="/index.css">
@@ -38,7 +65,7 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="./assets/index-BsAsWoGh.js"></script>
+  <script type="module" crossorigin src="./assets/index-BEwyPe9J.js"></script>
 </head>
 <body>
     <div id="root"></div>
