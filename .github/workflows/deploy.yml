@@ -1,5 +1,4 @@
 name: Deploy to GitHub Pages
-name: Deploy to GitHub Pages
 
 # Ensure the workflow has permission to push content and manage Pages
 permissions:
