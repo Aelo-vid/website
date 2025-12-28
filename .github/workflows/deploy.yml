@@ -1,5 +1,11 @@
 name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages
 
+# Ensure the workflow has permission to push content and manage Pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 on:
   push:
     branches:
@@ -10,6 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # keep using the provided GITHUB_TOKEN for pushes
+          persist-credentials: true
       - uses: actions/setup-node@v4
         with:
           node-version: '18'
