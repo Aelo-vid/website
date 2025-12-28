@@ -11,6 +11,8 @@ import { ScriptingShowcase } from './components/ScriptingShowcase';
 const App: React.FC = () => {
   // 言語の状態管理
   const [lang, setLang] = useState<Language>('ja');
+  // Nightly 表示トグル
+  const [showNightly, setShowNightly] = useState<boolean>(false);
   const t = translations[lang];
 
   // ダークモード固定設定
@@ -137,6 +139,29 @@ const App: React.FC = () => {
             <DownloadButton platform="macOS (Silicon)" />
             <DownloadButton platform="Linux" />
           </div>
+
+          {/* Nightly toggle (only show if nightly feature enabled in config) */}
+          {APP_CONFIG.nightly?.enabled && (
+            <>
+              <div className="mt-6 text-center">
+                <button
+                  onClick={() => setShowNightly(s => !s)}
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-neutral-800 text-sm font-medium tracking-widest hover:bg-neutral-800/40 transition-colors"
+                >
+                  Nightly Builds
+                  <svg className={`w-4 h-4 transition-transform ${showNightly ? 'rotate-180' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="1" d="M6 9l6 6 6-6"/></svg>
+                </button>
+              </div>
+
+              {showNightly && (
+                <div className="mt-6 flex flex-col md:flex-row items-center justify-center gap-8">
+                  <NightlyDownloadButton platform="Windows" />
+                  <NightlyDownloadButton platform="macOS (Silicon)" />
+                  <NightlyDownloadButton platform="Linux" />
+                </div>
+              )}
+            </>
+          )}
         </div>
       </section>
 
@@ -188,6 +213,42 @@ const DownloadButton: React.FC<{ platform: string }> = ({ platform }) => {
 
   const url = platformCfg.url || '#';
 
+  return (
+    <a
+      href={url}
+      target={url.startsWith('#') ? '_self' : '_blank'}
+      rel={url.startsWith('#') ? undefined : 'noopener noreferrer'}
+      className="group text-left px-8 py-5 border border-neutral-800 bg-neutral-900/50 hover:bg-neutral-800 rounded-none w-64 transition-all inline-block"
+    >
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-sm font-medium tracking-widest text-white">{platform}</span>
+        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="1" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+      </div>
+      <div className="text-[10px] text-neutral-500 font-mono">{version}</div>
+    </a>
+  );
+};
+
+// Nightly用ダウンロードボタン（consts の nightly を参照）
+const NightlyDownloadButton: React.FC<{ platform: string }> = ({ platform }) => {
+  const key = platform.toLowerCase().includes('mac') ? 'mac' : platform.toLowerCase().includes('linux') ? 'linux' : 'windows';
+  const nightlyCfg = (APP_CONFIG as any).nightly || { enabled: false };
+  const platformCfg = (nightlyCfg.downloads || {})[key] || { url: '#', enabled: false, label: 'Coming soon' };
+  const version = nightlyCfg.version || APP_CONFIG.version;
+
+  if (!platformCfg.enabled || !nightlyCfg.enabled) {
+    return (
+      <div className="group text-left px-8 py-5 border border-neutral-800 bg-neutral-900/20 opacity-60 rounded-none w-64 transition-all">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-sm font-medium tracking-widest text-neutral-400">{platform}</span>
+          <span className="text-[10px] font-mono text-neutral-500">{platformCfg.label || 'Coming soon'}</span>
+        </div>
+        <div className="text-[10px] text-neutral-500 font-mono">{version}</div>
+      </div>
+    );
+  }
+
+  const url = platformCfg.url || '#';
   return (
     <a
       href={url}
