@@ -148,7 +148,7 @@ const App: React.FC = () => {
                   onClick={() => setShowNightly(s => !s)}
                   className="inline-flex items-center gap-2 px-6 py-3 border border-neutral-800 text-sm font-medium tracking-widest hover:bg-neutral-800/40 transition-colors"
                 >
-                  Nightly Builds
+                  {t.nightlyToggle}
                   <svg className={`w-4 h-4 transition-transform ${showNightly ? 'rotate-180' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="1" d="M6 9l6 6 6-6"/></svg>
                 </button>
               </div>

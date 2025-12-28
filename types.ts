@@ -56,4 +56,5 @@ export interface TranslationStrings {
   statsPlugins: string;
   readyTitle: string;
   readyDesc: string;
+  nightlyToggle: string;
 }
