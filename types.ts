@@ -1,0 +1,59 @@
+
+export type Language = 'en' | 'ja';
+// Theme type removed as we are enforcing Dark Mode only.
+
+export interface TranslationStrings {
+  navFeatures: string;
+  navComparison: string;
+  navDownload: string;
+  heroTitle: string;
+  heroSubtitle: string;
+  betaTag: string;
+  ctaDownload: string;
+  ctaLearnMore: string;
+  featureFreeTitle: string;
+  featureFreeDesc: string;
+  featureJSTitle: string;
+  featureJSDesc: string;
+  featureHybridTitle: string;
+  featureHybridDesc: string;
+  featureGPUTitle: string;
+  featureGPUDesc: string;
+  scriptingTitle: string;
+  scriptingDesc: string;
+  scriptItem1: string;
+  scriptItem2: string;
+  scriptItem3: string;
+  scriptItem4: string;
+  comparisonTitle: string;
+  compMetric: string;
+  compIndustry: string;
+  compFree: string;
+  compAelo: string;
+  metricPrice: string;
+  metricScripting: string;
+  metricWorkflow: string;
+  metricRendering: string;
+  metricUpdates: string;
+  valIndustryPrice: string;
+  valFreePrice: string;
+  valAeloPrice: string;
+  valIndustryWorkflow: string;
+  valFreeWorkflow: string;
+  valAeloWorkflow: string;
+  valIndustryScripting: string;
+  valFreeScripting: string;
+  valAeloScripting: string;
+  valIndustryRendering: string;
+  valFreeRendering: string;
+  valAeloRendering: string;
+  valIndustryUpdates: string;
+  valFreeUpdates: string;
+  valAeloUpdates: string;
+  footerRights: string;
+  statsUsers: string;
+  statsRender: string;
+  statsPlugins: string;
+  readyTitle: string;
+  readyDesc: string;
+}
